@@ -1,0 +1,681 @@
+@import url('/../stylesheet/normalize.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap'); /*Uni St.Gallen Farbcode : grün: #00762C  light green: #009135 weiß: #ffffff*/
+
+:root {
+    --main-color:#1f8db5; /* light blue*/
+    --gpt-color:#35BC55;
+    --light-color: #d35656;
+    --avatar-image: url("../../../public/img/mindMate.png");
+    --background-image: url("../../../public/img/clouds.png");
+}
+
+
+html, body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #ffffff;
+  color: #212121;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+a {
+  color: #b51f1f;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+button {
+  border: none;
+  outline-color: transparent;
+
+  transform: scale(1);
+  transition: transform 0.5s;
+
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ändern der Überschrift/ Chatbot Namens*/
+
+h1 {
+  color: black;
+  margin-top: auto;
+  text-align: center;
+  border-radius: 5px;
+  overflow: visible;
+  width: inherit;
+}
+
+/* ändern der Darstellung des kleinen Chatbotnamens über der Chatbox*/
+
+h2 {
+  color: #808080;
+  font-size: 10px;
+  margin-top: 3px;
+  text-align: left;
+}
+
+/* ändern der Schrift innerhalb der Eingabefensters*/
+
+h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+/*Ändern der Urzeit unterhalb der Chatbox*/
+
+h5 {
+  color: grey;
+  font-size: 10px;
+  margin-right: 15%;
+  text-align: right;
+}
+
+.chatbot {
+  display: block;
+  width: 800px;
+  /*height: calc(100vh - 50px);*/
+  height: calc(100vh - 100px);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  box-shadow: 0px 0px 36px -3px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.header {
+  display: block;
+  width: 100%;
+  height: 64px;
+  background-color: var(--main-color);  /* #b51f1f; */
+  color: #ffffff;
+  border-radius: 10px 10px 0 0;
+}
+
+.header-logo {
+  display: block;
+  width: 85px;
+  height: 64px;
+  float: left;
+  background-image: url("../../../public/img/epfl.png");
+  background-size: 60px 60px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.header-botname {
+  display: block;
+  width: 70px;
+  height: 64px;
+  line-height: 64px;
+  float: left;
+  font-size: 18pt;
+}
+
+.header-button-bar {
+  display: block;
+  float: right;
+}
+
+.header-button {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  margin: 17px 17px 17px 0;
+  padding: 0 10px;
+
+  background-color: #ffffff;
+  color: var(--main-color); /* #00762C; */
+
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.cloud-shape {
+  background: url('../../../public/img/cloud-computing.png') no-repeat center center;
+  background-size: 85%;
+  display: inline-block;
+  height: 40px;
+  line-height: 30px;
+
+  margin: 17px 17px 17px 0;
+  padding: 0 10px;
+  color: var(--main-color);
+
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.header-button span {
+  margin-left: 5px;
+}
+
+.buttonTest {
+  border-radius: 4px;
+  background-color: var(--main-color);
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 20px;
+
+}
+
+.progress {
+  margin: 0 auto;
+  padding: 2px;
+  width: 95%;
+  alignment: center;
+  height: 30px;
+  box-sizing: border-box;
+}
+.progress::-webkit-progress-value {
+  background-color: lightseagreen; /* Change this to the desired color */
+}
+
+.progress::-moz-progress-bar {
+  background-color: lightcoral; /* Change this to the desired color */
+}
+
+.progress .progress-bar {
+  height: 100%;
+  width: 0%;
+  animation: fill-bar 3s infinite;
+}
+
+.progressbarText {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -86%);
+  padding: 0.5em;
+  border-radius: 0.25em;
+}
+
+#scrollbox {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 100px - 64px - 50px);
+  overflow-y: auto;
+}
+
+#feedback, #privacy, #answers, #help, #dashboard, #Detail, #ELEAIframeTemplate {
+  display: none;
+  width: 100%;
+  height: calc(100vh - 64px - 25px - 86px);
+  padding: 30px;
+  box-sizing: border-box;
+
+  text-align: center;
+  overflow-y: auto;
+}
+
+#feedback button, #privacy button, #answers button, #help button, #Detail button {
+  background-color: #ffffff;
+  color: var(--main-color); /* #b51f1f;*/
+  border: 1px solid var(--main-color); /*#b51f1f;*/
+  border-radius: 5px;
+  padding: 7px 10px;
+
+  font-size: 14pt;
+  cursor: pointer;
+}
+
+#feedback button.button-primary, #privacy button.button-primary, #answers button.button-primary, #help button.button-primary, #backButton, #Detail button.button-primary {
+  background-color: var(--main-color); /* #b51f1f; */
+  color: #ffffff;
+}
+
+#feedback-form {
+  display: block;
+}
+
+#feedback-form label {
+  margin-right: 10px;
+}
+
+#feedback fieldset {
+  border: none;
+  width: 100%;
+}
+
+/****** Style Star Rating Widget *****/
+
+fieldset.rating {
+  width: 170px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > label { 
+  color: #ddd; 
+  float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+
+#feedback textarea {
+  width: 100%;
+  max-width: 400px;
+  resize: vertical;
+  padding: 10px;
+  box-sizing: border-box;
+
+  border: 1px solid var(--main-color); /*#b51f1f;*/
+  border-radius: 5px;
+}
+
+/* Mit diesem Abschnnitt kann die Box verändert werden, in der die Konversation stattfindet*/
+
+.messagecontainer {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  /*background-color: #ffffff;*/
+  background-image: var(--background-image);
+  min-height: 100%
+}
+
+/*anpassen der Chatbox*/
+
+#chatbox {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+/*Anpassen des Eingabefeldes*/
+
+#typing {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+/*Anpassen der Box, in der die Eingabe stattfinden soll*/
+
+#userInput {
+  width: 100%;
+  height: 50px;
+  display: block;
+  background-color: #f4f4f4;
+  padding: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  border-radius: 0 0 10px 10px;
+}
+
+/*Einstellen des "Message" Feldes*/
+
+#textInput {
+  width: calc(100% - 90px);
+  height: 40px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 25px;
+}
+
+#buttonSkip {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  color: var(--main-color);  /*#b51f1f;*/
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+#buttonSkip:hover {
+  background-color: #dfdfdf;
+}
+
+/*Einstellen des "Send" Buttons*/
+#buttonInput {
+  width: 40px;
+  height: 40px;
+  background-color: var(--main-color); /*#b51f1f;*/
+  color: #ffffff;
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+#buttonInput:hover {
+  background-color: var(--main-color); /*#b51f1f;*/
+}
+
+/* Einstellungen an den Chatbuttonvorschlägen, welche in der Datenbank festgelegt wurden*/
+
+.chatSuggest {
+  display: inline-block;
+  margin: 5px 5px 5px 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: var(--main-color); /*#b51f1f;*/
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.chatSuggest:hover {
+  background: var(--main-color); /*#b51f1f;*/
+}
+
+.chatSuggest:disabled {
+  background: #808080;
+  cursor: default;
+}
+
+.buttonEval {
+  border-radius: 4px;
+  background-color: var(--main-color);
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-bottom: 2rem;
+
+  transform: scale(1);
+  font-weight: normal;
+}
+
+.buttonEval:hover {
+  transform: scale(1.1);
+  font-weight: bold;
+}
+
+.buttonEval:disabled {
+  background: #808080;
+  cursor: default;
+}
+
+.header-button:disabled {
+  background: #808080;
+  cursor: default;
+}
+
+/*Einstellungen am User-Gesprächsfeld*/
+
+.userText {
+  display: block;
+  padding: 10px;
+  /* box-sizing: border-box; */
+  float: right;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  background-color: var(--main-color); /*#b51f1f;*/
+  border-radius: 10px;
+}
+
+/* Einstellungen am Gesprächsfeld des CHatbots*/
+
+.botText {
+  display: flex;
+  width: 85%;
+  min-height: 84px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 25px;
+  background-color: rgba(217, 213, 213, 0.84);
+  /* background-color: #f4f4f4;   rgba(244, 244, 244, 0.58); */
+  border-radius: 10px;
+}
+
+.message {
+  display: block;
+  width: 100%;
+  min-height: 60px;
+  clear: both;
+  overflow-wrap: anywhere;
+}
+
+.message-botname {
+  display: block;
+  width: 85%;
+  margin: 5px;
+  text-align: left;
+  font-weight: bold;
+  color: #808080;
+  font-size: 12px;
+}
+
+.avatar-wrapper {
+  display: block;
+  width: 64px;
+  float: left;
+}
+
+/*Bei Nutzung eines Avatars*/
+
+.avatar {
+  display: block;
+  width: 64px;
+  height: 64px;
+  border-radius: 100%;
+  content: var(--avatar-image);
+}
+
+.data-wrapper {
+  display: block;
+  width: calc(100% - 80px);
+  float: right;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+.message-time {
+  display: block;
+  width: 85%;
+  margin: 5px;
+  text-align: right;
+  font-weight: bold;
+  color: #808080;
+  font-size: 12px;
+}
+
+#tidbit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+}
+
+#beginningButton {
+  text-align: center !important;
+}
+
+#dashboard-h1 {
+  font-size: 1.8rem !important;
+
+}
+#dashboard-h2 {
+  font-size: 1.3rem !important;
+}
+
+/*for the react highlighting...*/
+.annotation-0 {
+  border-bottom: 0.15em solid gold;
+  /* background-color: gold; */
+  transition: all 0.25s;
+  /* cursor: pointer; */
+}
+
+.annotation-0:hover {
+  background-color: gold;
+}
+
+.annotation-0pos {
+  border-bottom: 0.15em solid lightgreen;
+  /* background-color: lightgreen; */
+  transition: all 0.25s;
+  /* cursor: pointer; */
+}
+
+.annotation-0pos:hover {
+  background-color: lightgreen;
+}
+
+.annotation-1pos {
+  border-bottom: 0.15em solid mediumseagreen;
+  transition: all 0.25s;
+}
+
+.annotation-1pos:hover {
+  background-color: mediumseagreen;
+}
+
+.annotation-2pos {
+  border-bottom: 0.15em solid darkseagreen;
+  transition: all 0.25s;
+}
+
+.annotation-2pos:hover {
+  background-color: darkseagreen;
+}
+
+.annotation-0neg {
+  border-bottom: 0.15em solid mediumvioletred;
+  transition: all 0.25s;
+}
+
+.annotation-0neg:hover {
+  background-color: mediumvioletred;
+}
+
+.annotation-1neg {
+  border-bottom: 0.15em solid lightcoral;
+  transition: all 0.25s;
+}
+
+.annotation-1neg:hover {
+  background-color: lightcoral;
+}
+
+.annotation-2neg {
+  border-bottom: 0.15em solid lightsalmon;
+  transition: all 0.25s;
+}
+
+.annotation-2neg:hover {
+  background-color: lightsalmon;
+}
+
+.annotation-0neut {
+  border-bottom: 0.15em solid darkgrey;
+  transition: all 0.25s;
+}
+
+.annotation-0neut:hover {
+  background-color: darkgrey;
+}
+
+.annotation-1neut {
+  border-bottom: 0.15em solid burlywood;
+  transition: all 0.25s;
+}
+
+.annotation-1neut:hover {
+  background-color: burlywood;
+}
+
+@media only screen and (max-width: 1000px) {
+  .chatbot {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    margin-top: 0px;
+    /*box-shadow: 0;*/
+    border-radius: 50px;
+  }
+
+  .header {
+    border-radius: 0;
+  }
+
+  .header-button span {
+    display: none;
+  }
+
+  #userInput {
+    border-radius: 0;
+  }
+
+  .avatar-wrapper {
+    width: 42px;
+  }
+
+  .data-wrapper {
+    width: calc(100% - 48px);
+  }
+  
+  /*Bei Nutzung eines Avatars*/
+  
+  .avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+
+}
+
